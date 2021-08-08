@@ -1,0 +1,52 @@
+//Breadth First Search
+
+//global or class scope variable
+
+n = number of nodes in the graph
+g = adjacency list representing the unweighted graph
+
+//s = start node, e = end node, and 0<=e, s<n
+
+function bfs(s, e):
+	prev = solve(s)		//do a bfs starting at node s
+
+	return reconstructPath(s, e, prev) //return reconstructed path from s->e
+
+
+function solve(s):
+	q = queue data structure with enqueue and dequeue
+	q,enqueue(s)
+
+	visited = [false, ..., false]
+	visited[s] = true
+
+	prev = [null, ..., null]
+	while(!q.isEmpty()):
+		node = q.dequeue()
+		neighbours = g.get(node)
+
+		for(next:neighbours){
+			if(!visited[next])
+				q.enqueue(next)
+				visited[next] = true
+				prev[next] = node
+		}
+
+	return prev
+
+
+function reconstructPath(s, e, prev){
+	
+	//reconstruct path going backwards from e
+	path = []
+	for(at = e; at!=null;at = prev[at]){
+		path.add(at)
+	}
+	path.reverse()
+
+	//if s and e are connected return the path
+	if(path[0]==s){
+		return path
+	}
+	return []
+}

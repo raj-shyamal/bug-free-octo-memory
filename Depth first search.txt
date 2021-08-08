@@ -1,0 +1,52 @@
+// Depth first search 
+
+//pseudo code
+
+
+//global or class scope variable
+n = number of nodes in the graph
+g = adjacency list representing graph
+visited = [false, false, ..., false] //size n
+
+function dfs(at):
+	if visited[at]:return
+	visited[at] = true
+
+	neighbours = graph[at]
+	for next in neighbours:
+		dfs(next)
+
+//start dfs at node zero
+start_node = 0
+dfs(start_node)
+
+
+
+
+
+//Connected components
+
+//global or class scope variable
+n = number of nodes in the graph
+g = adjacency list representing graph
+count = 0
+components = empty integer array //size n
+visited = [false, false, ..., false] //size n
+
+function findComponents():
+	for(int i=0;i<n;i++){
+		if(!visited[i]):
+			count++
+			dfs(i)
+	}
+	return (count, components)
+
+
+function dfs(at):
+	visited[at] = true
+	components[at] = count
+
+	for(next:g[at]):
+		if(!visited[next]):
+			dfs(next)
+

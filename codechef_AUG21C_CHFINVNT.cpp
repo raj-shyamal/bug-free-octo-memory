@@ -6,18 +6,24 @@ using namespace std;
 void solve(){
     int n, p, k;
     cin>>n>>p>>k;
-    int ans;
-    if((n-1)%k!=0)
-    	ans = (p%k)*((n+k-1)/k) + ((p/k)+1);
+    int ans = 0;
+    int q = p%k;
+    q--;
+    int s = (((n-1)/k)*k);
+    s = n-1-s;
+    if(q>s){
+    	ans+=(s+1)*((n-1)/k+1)+(q-s)*((n-1)/k);
+    }
     else{
-    	if(p%k==0){
-    		ans = p/k +1;
-    	}
-    	else{
-    		ans = ((n-1)/k +1)+(p%k-1)*((n+k-1)/k) + ((p/k)+1);
+    	ans+=((n-1)/k+1)*(q+1);
+    }
+    for(int i=q+1;i<=n-1;i+=k){
+    	ans++;
+    	if(i==p){
+    		cout<<ans<<'\n';
+    		break;
     	}
     }
-    cout<<ans<<'\n';
 }
 
 signed main(){
